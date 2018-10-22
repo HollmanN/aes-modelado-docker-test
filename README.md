@@ -1,4 +1,4 @@
-##Docker Test
+## Docker Test ##
 
 Calculator application to test docker, based on REST services
 
