@@ -1,0 +1,68 @@
+title: Docker Calculator
+description: Calculator project based on Docker for the course Model and Validation of Architectures
+version: 1.0.0
+
+mediaType: application/json
+
+protocols:
+  - HTTP
+  - HTTPS
+
+baseUri: /
+/operations:
+  '/div/{args}':
+    get:
+      displayName: DivOperation
+      responses:
+        '200':
+          description: Result
+          body:
+            application/json:
+              type: integer
+    uriParameters:
+      args:
+        type: array
+        items:
+          type: integer
+  '/mul/{args}':
+    get:
+      displayName: MulOperation
+      responses:
+        '200':
+          description: Result
+          body:
+            application/json:
+              type: integer
+    uriParameters:
+      args:
+        type: array
+        items:
+          type: integer
+  '/res/{args}':
+    get:
+      displayName: ResOperation
+      responses:
+        '200':
+          description: Result
+          body:
+            application/json:
+              type: integer
+    uriParameters:
+      args:
+        type: array
+        items:
+          type: integer
+  '/sum/{args}':
+    get:
+      displayName: SumOperation
+      responses:
+        '200':
+          description: Result
+          body:
+            application/json:
+              type: integer
+    uriParameters:
+      args:
+        type: array
+        items:
+          type: integer
