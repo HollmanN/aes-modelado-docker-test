@@ -22,8 +22,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <swagger.version>2.9.2</swagger.version>
         <docker.image.prefix>aes-model</docker.image.prefix>
+
+        <api-definition-folder>${project.basedir}</api-definition-folder>
+        <generated-sources-folder>${project.build.directory}/generated-sources</generated-sources-folder>
+        <swagger.version>2.9.2</swagger.version>
+        <io.swagger.codegen.version>2.3.1</io.swagger.codegen.version>
+
+        <api.package>edu.javeriana.aes.docker</api.package>
+        <model.package>edu.javeriana.aes.docker</model.package>
+
+        <jetty-version>9.2.15.v20160210</jetty-version>
+        <slf4j-version>1.7.21</slf4j-version>
+        <junit-version>4.12</junit-version>
+        <servlet-api-version>2.5</servlet-api-version>
+        <jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
     </properties>
 
 
@@ -53,6 +66,24 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.joschi.jackson</groupId>
+            <artifactId>jackson-datatype-threetenbp</artifactId>
+            <version>${jackson-threetenbp-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api-version}</version>
         </dependency>
     </dependencies>
 
@@ -90,6 +121,50 @@
                                     <version>${project.version}</version>
                                 </artifactItem>
                             </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.12</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>
+                                    ${generated-sources-folder}/src/main/java
+                                </source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>${io.swagger.codegen.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${api-definition-folder}/src/main/resources/contract/swagger.yaml</inputSpec>
+                            <language>spring</language>
+                            <library>spring-mvc</library>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <apiPackage>${api.package}</apiPackage>
+                            <modelPackage>${model.package}</modelPackage>
                         </configuration>
                     </execution>
                 </executions>

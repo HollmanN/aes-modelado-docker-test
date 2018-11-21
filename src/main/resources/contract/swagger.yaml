@@ -1,0 +1,92 @@
+swagger: '2.0'
+info:
+  title: Docker Calculator
+  description: Calculator project based on Docker for the course Model and Validation of Architectures
+  version: 1.0.0
+  contact:
+    name: API Author
+    url: https://github.com/HollmanN
+    email: hollman_castro@outlook.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+
+schemes:
+- http
+- https
+
+basePath: /
+
+produces:
+- application/json
+
+paths:
+  /operations/sum/{args}:
+    get:
+      tags:
+      - Sum operation
+      operationId: SumOperation
+      parameters:
+      - name: args
+        in: path
+        type: array
+        required: true
+        items:
+          type: integer
+      responses:
+        200:
+          description: Result
+          schema:
+            type: integer
+  /operations/res/{args}:
+    get:
+      tags:
+      - Res operation
+      operationId: ResOperation
+      parameters:
+      - name: args
+        in: path
+        type: array
+        required: true
+        items:
+          type: integer
+      responses:
+        200:
+          description: Result
+          schema:
+            type: integer
+  /operations/mul/{args}:
+    get:
+      tags:
+      - Mul operation
+      operationId: MulOperation
+      parameters:
+      - name: args
+        in: path
+        type: array
+        required: true
+        items:
+          type: integer
+      responses:
+        200:
+          description: Result
+          schema:
+            type: integer
+  /operations/div/{args}:
+    get:
+      tags:
+      - Div operation
+      operationId: DivOperation
+      parameters:
+      - name: args
+        in: path
+        type: array
+        required: true
+        items:
+          type: integer
+      responses:
+        200:
+          description: Result
+          schema:
+            type: integer
